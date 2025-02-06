@@ -1,5 +1,9 @@
 "use client";
 
+import Link from "next/link";
+
+import { FlameIcon, HomeIcon, PlaySquareIcon } from "lucide-react";
+
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -7,8 +11,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { FlameIcon, HomeIcon, PlaySquareIcon } from "lucide-react";
-import Link from "next/link";
 
 const items = [
   {
