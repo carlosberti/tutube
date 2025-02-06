@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div>
-      <Button variant='destructive'>
-        Click me
-      </Button>
+      <Image src="/logo.svg" alt="TuTube logo" width={50} height={50} />
+      <p className="text-xl font-semibold tracking-tight">TuTube</p>
     </div>
   );
 }
