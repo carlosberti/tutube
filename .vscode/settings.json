@@ -1,0 +1,15 @@
+{
+  "eslint.useFlatConfig": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "eslint.validate": ["typescript"],
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.singleQuote": false,
+  "prettier.printWidth": 80,
+  "prettier.semi": true,
+  "prettier.trailingComma": "es5",
+  "prettier.jsxSingleQuote": false,
+  "prettier.bracketSpacing": true
+}
