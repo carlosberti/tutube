@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
 
-import { MainSection } from "./main-section";
+import { MainSection } from ".";
 
 beforeAll(() => {
   Object.defineProperty(window, "matchMedia", {

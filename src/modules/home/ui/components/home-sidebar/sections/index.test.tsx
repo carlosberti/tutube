@@ -2,10 +2,16 @@ import { render, screen } from "@testing-library/react";
 
 import { SidebarProvider } from "@/components/ui/sidebar";
 
-import { HomeSideBar } from "./index";
+import { Sections } from "./index";
 
-vi.mock("./sections", () => ({
-  Sections: () => <div data-testid="sections">Sections</div>,
+vi.mock("./main-section", () => ({
+  MainSection: () => <div data-testid="main-section">Main Section</div>,
+}));
+
+vi.mock("./personal-section", () => ({
+  PersonalSection: () => (
+    <div data-testid="personal-section">Personal Section</div>
+  ),
 }));
 
 beforeAll(() => {
@@ -24,10 +30,11 @@ beforeAll(() => {
   });
 });
 
-describe("HomeSideBar", () => {
+describe("Sections", () => {
   it("should render correctly", () => {
-    render(<HomeSideBar />, { wrapper: SidebarProvider });
+    render(<Sections />, { wrapper: SidebarProvider });
 
-    expect(screen.getByTestId("sections")).toBeInTheDocument();
+    expect(screen.getByTestId("main-section")).toBeInTheDocument();
+    expect(screen.getByTestId("personal-section")).toBeInTheDocument();
   });
 });
