@@ -3,7 +3,7 @@ export default {
   "src/**/*.{js,jsx,ts,tsx}": [
     "bun prettier --write",
     "bun eslint --fix",
-    "bun vitest related --run"
+    "bun vitest related --run",
   ],
-  "src/**/*.{json,css,md}": ["bun prettier --write"]
-}
+  "src/**/*.{json,css,md}": ["bun prettier --write"],
+};
