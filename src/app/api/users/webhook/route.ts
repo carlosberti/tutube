@@ -6,9 +6,10 @@ import { Webhook } from "svix";
 
 import { db } from "@/db";
 import { users } from "@/db/schema";
+import { env } from "@/env";
 
 export async function POST(req: Request) {
-  const SIGNING_SECRET = process.env.CLERK_SIGNING_SECRET;
+  const SIGNING_SECRET = env.CLERK_SIGNING_SECRET;
 
   if (!SIGNING_SECRET) {
     throw new Error(

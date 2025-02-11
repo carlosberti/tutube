@@ -10,9 +10,10 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { videos } from "@/db/schema";
+import { env } from "@/env";
 import { mux } from "@/lib/mux";
 
-const SIGNING_SECRET = process.env.MUX_WEBHOOK_SECRET!;
+const SIGNING_SECRET = env.MUX_WEBHOOK_SECRET;
 
 type WebhookEvent =
   | VideoAssetCreatedWebhookEvent
