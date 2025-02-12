@@ -57,8 +57,21 @@ const eslintConfig = [
       "import/first": "error",
       "import/newline-after-import": "error",
       "import/no-duplicates": "error",
+      "no-restricted-syntax": [
+        "error",
+        {
+          "selector": "MemberExpression[object.name='process'][property.name='env']",
+          "message": "Use environment variables from @/env instead of process.env"
+        }
+      ],
     },
   },
+  {
+    files: ["**/src/env/**/*.{js,ts,jsx,tsx}"],
+    rules: {
+      "no-restricted-syntax": "off"
+    }
+  }
 ];
 
 export default eslintConfig;
