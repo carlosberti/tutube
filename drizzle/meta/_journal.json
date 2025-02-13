@@ -29,6 +29,34 @@
       "when": 1739310847083,
       "tag": "0003_lonely_marvel_zombies",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1739472871990,
+      "tag": "0004_add thumbnail_url to videos",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1739473280140,
+      "tag": "0005_add preview_url to videos",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1739473677616,
+      "tag": "0006_add duraiton to videos",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1739475203663,
+      "tag": "0007_add videos visibility to videos",
+      "breakpoints": true
     }
   ]
 }

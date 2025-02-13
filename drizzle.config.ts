@@ -1,12 +1,15 @@
+import { loadEnvFile } from "process";
+
 import { defineConfig } from "drizzle-kit";
 
-import { env } from "@/env";
+loadEnvFile(".env.local");
 
 export default defineConfig({
   out: "./drizzle",
   schema: "./src/db/schema.ts",
   dialect: "postgresql",
   dbCredentials: {
-    url: env.DATABASE_URL,
+    // eslint-disable-next-line no-restricted-syntax
+    url: process.env.DATABASE_URL!,
   },
 });
