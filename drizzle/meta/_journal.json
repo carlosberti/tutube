@@ -57,6 +57,13 @@
       "when": 1739475203663,
       "tag": "0007_add videos visibility to videos",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1739553844211,
+      "tag": "0008_add thumbnail and preview key",
+      "breakpoints": true
     }
   ]
 }

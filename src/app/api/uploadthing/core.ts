@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
+import { UploadThingError, UTApi } from "uploadthing/server";
 import { z } from "zod";
 
 import { db } from "@/db";
@@ -38,6 +38,25 @@ export const ourFileRouter = {
 
       if (!user) throw new UploadThingError("Unauthorized");
 
+      const [existingVideo] = await db
+        .select({
+          thumbnailKey: videos.thumbnailKey,
+        })
+        .from(videos)
+        .where(and(eq(videos.userId, user.id), eq(videos.id, input.videoId)));
+
+      if (!existingVideo) throw new UploadThingError("Not found");
+
+      if (existingVideo.thumbnailKey) {
+        const utapi = new UTApi();
+
+        await utapi.deleteFiles(existingVideo.thumbnailKey);
+        await db
+          .update(videos)
+          .set({ thumbnailUrl: null, thumbnailKey: null })
+          .where(and(eq(videos.userId, user.id), eq(videos.id, input.videoId)));
+      }
+
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { user, ...input };
     })
@@ -45,7 +64,7 @@ export const ourFileRouter = {
       // This code RUNS ON YOUR SERVER after upload
       await db
         .update(videos)
-        .set({ thumbnailUrl: file.ufsUrl })
+        .set({ thumbnailUrl: file.ufsUrl, thumbnailKey: file.key })
         .where(
           and(
             eq(videos.userId, metadata.user.id),

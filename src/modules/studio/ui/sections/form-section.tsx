@@ -244,6 +244,7 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                               onClick={() =>
                                 restoreThumbnail.mutate({ id: videoId })
                               }
+                              disabled={!video.thumbnailKey}
                             >
                               <RotateCcwIcon className="mr-1" />
                               Restore
