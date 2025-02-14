@@ -12,7 +12,7 @@
     "test:coverage": "vitest run --coverage",
     "test:coverage:ui": "vitest --coverage --ui",
     "lint": "next lint",
-    "format": "prettier --write .",
+    "format": "prettier --write . --plugin=prettier-plugin-tailwindcss",
     "prepare": "husky"
   },
   "dependencies": {
@@ -106,6 +106,7 @@
     "lint-staged": "^15.4.3",
     "postcss": "^8",
     "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.19.2",
     "typescript": "^5",

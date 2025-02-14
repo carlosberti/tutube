@@ -17,7 +17,7 @@ export function VideoPlayer({
 }: VideoPlayerProps) {
   return (
     <MuxPlayer
-      className="w-full h-full object-contain"
+      className="h-full w-full object-contain"
       playbackId={playbackId || ""}
       poster={thumbnailUrl || "/placeholder.jpg"}
       playerInitTime={0}

@@ -35,13 +35,13 @@ function VideosSectionSuspense() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="pl-6 w-[510px]">Video</TableHead>
+              <TableHead className="w-[510px] pl-6">Video</TableHead>
               <TableHead>Visibility</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Date</TableHead>
               <TableHead className="text-right">Views</TableHead>
               <TableHead className="text-right">Comments</TableHead>
-              <TableHead className="text-right pr-6">Likes</TableHead>
+              <TableHead className="pr-6 text-right">Likes</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -66,11 +66,11 @@ function VideosSectionSuspense() {
                           />
                         </div>
 
-                        <div className="flex flex-col overflow-hidden gap-y-1">
-                          <span className="text-sm line-clamp-1">
+                        <div className="flex flex-col gap-y-1 overflow-hidden">
+                          <span className="line-clamp-1 text-sm">
                             {video.title}
                           </span>
-                          <span className="text-sm text-muted-foreground line-clamp-1">
+                          <span className="line-clamp-1 text-sm text-muted-foreground">
                             {video.description || "No description"}
                           </span>
                         </div>
@@ -79,9 +79,9 @@ function VideosSectionSuspense() {
                     <TableCell>
                       <div className="flex items-center">
                         {video.visibility === "private" ? (
-                          <LockIcon className="size-4 mr-2" />
+                          <LockIcon className="mr-2 size-4" />
                         ) : (
-                          <Globe2Icon className="size-4 mr-2" />
+                          <Globe2Icon className="mr-2 size-4" />
                         )}
                         {snakeCaseToTitleCase(video.visibility)}
                       </div>
@@ -98,7 +98,7 @@ function VideosSectionSuspense() {
                     <TableCell className="text-right text-sm">
                       comments
                     </TableCell>
-                    <TableCell className="text-right text-sm pr-6">
+                    <TableCell className="pr-6 text-right text-sm">
                       likes
                     </TableCell>
                   </TableRow>
@@ -123,13 +123,13 @@ function VideosSectionSkeleton() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="pl-6 w-[510px]">Video</TableHead>
+            <TableHead className="w-[510px] pl-6">Video</TableHead>
             <TableHead>Visibility</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Date</TableHead>
             <TableHead className="text-right">Views</TableHead>
             <TableHead className="text-right">Comments</TableHead>
-            <TableHead className="text-right pr-6">Likes</TableHead>
+            <TableHead className="pr-6 text-right">Likes</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -154,13 +154,13 @@ function VideosSectionSkeleton() {
                 <Skeleton className="h-4 w-24" />
               </TableCell>
               <TableCell className="text-right">
-                <Skeleton className="h-4 w-12 ml-auto" />
+                <Skeleton className="ml-auto h-4 w-12" />
               </TableCell>
               <TableCell className="text-right">
-                <Skeleton className="h-4 w-12 ml-auto" />
+                <Skeleton className="ml-auto h-4 w-12" />
               </TableCell>
-              <TableCell className="text-right pr-6">
-                <Skeleton className="h-4 w-12 ml-auto" />
+              <TableCell className="pr-6 text-right">
+                <Skeleton className="ml-auto h-4 w-12" />
               </TableCell>
             </TableRow>
           ))}

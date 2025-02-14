@@ -8,19 +8,19 @@ import { StudioUploadModal } from "../studio-upload-modal";
 
 export function StudioNavBar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 h-16 bg-white flex items-center px-2 pr-5 z-50 border-b shadow-md">
-      <div className="flex items-center gap-4 w-full justify-between">
-        <div className="flex items-center flex-shrink-0">
+    <nav className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center border-b bg-white px-2 pr-5 shadow-md">
+      <div className="flex w-full items-center justify-between gap-4">
+        <div className="flex flex-shrink-0 items-center">
           <SidebarTrigger />
           <Link href="/studio">
-            <div className="p-4 flex items-center gap-1">
+            <div className="flex items-center gap-1 p-4">
               <Image src="/logo.svg" alt="Studio logo" width={32} height={32} />
               <p className="text-xl font-semibold tracking-tight">Studio</p>
             </div>
           </Link>
         </div>
 
-        <div className="flex-shrink-0 items-center flex gap-4">
+        <div className="flex flex-shrink-0 items-center gap-4">
           <StudioUploadModal />
           <AuthButton />
         </div>

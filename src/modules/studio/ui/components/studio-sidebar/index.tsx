@@ -21,7 +21,7 @@ export function StudioSideBar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar className="pt-16 z-40" collapsible="icon">
+    <Sidebar className="z-40 pt-16" collapsible="icon">
       <SidebarContent className="bg-background">
         <SidebarGroup>
           <SidebarMenu>

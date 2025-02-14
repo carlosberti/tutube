@@ -52,7 +52,7 @@ export function FilterCarousel({
     <div className="relative w-full">
       <div
         className={cn(
-          "absolute left-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none",
+          "pointer-events-none absolute bottom-0 left-12 top-0 z-10 w-12 bg-gradient-to-r from-white to-transparent",
           current === 1 && "hidden"
         )}
       />
@@ -67,12 +67,12 @@ export function FilterCarousel({
         <CarouselContent className="-ml-3">
           {!isLoading && (
             <CarouselItem
-              className="pl-3 basis-auto"
+              className="basis-auto pl-3"
               onClick={() => onSelect(null)}
             >
               <Badge
                 variant={value === null ? "default" : "secondary"}
-                className="rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm"
+                className="cursor-pointer whitespace-nowrap rounded-lg px-3 py-1 text-sm"
               >
                 All
               </Badge>
@@ -80,8 +80,8 @@ export function FilterCarousel({
           )}
           {isLoading &&
             Array.from({ length: 15 }).map((_, index) => (
-              <CarouselItem key={index} className="pl-3 basis-auto">
-                <Skeleton className="rounded-lg px-3 py-1 h-full text-sm w-[100px] font-semibold">
+              <CarouselItem key={index} className="basis-auto pl-3">
+                <Skeleton className="h-full w-[100px] rounded-lg px-3 py-1 text-sm font-semibold">
                   &nbsp;
                 </Skeleton>
               </CarouselItem>
@@ -90,12 +90,12 @@ export function FilterCarousel({
             data.map((item) => (
               <CarouselItem
                 key={item.value}
-                className="pl-3 basis-auto"
+                className="basis-auto pl-3"
                 onClick={() => onSelect(item.value)}
               >
                 <Badge
                   variant={value === item.value ? "default" : "secondary"}
-                  className="rounded-lg px-3 py-1 cursor-pointer whitespace-nowrap text-sm"
+                  className="cursor-pointer whitespace-nowrap rounded-lg px-3 py-1 text-sm"
                 >
                   {item.label}
                 </Badge>
@@ -108,7 +108,7 @@ export function FilterCarousel({
 
       <div
         className={cn(
-          "absolute right-12 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none",
+          "pointer-events-none absolute bottom-0 right-12 top-0 z-10 w-12 bg-gradient-to-l from-white to-transparent",
           current === count && "hidden"
         )}
       />

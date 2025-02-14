@@ -47,7 +47,7 @@ export function InfiniteScroll({
           {isFetchingNextPage ? "Loading..." : "Load More"}
         </Button>
       ) : (
-        <p className="text-muted-foreground text-xs">
+        <p className="text-xs text-muted-foreground">
           You have reached the end of the list
         </p>
       )}

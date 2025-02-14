@@ -8,23 +8,23 @@ import { SearchInput } from "./search-input";
 
 export function HomeNavBar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 h-16 bg-white flex items-center px-2 pr-5 z-50">
-      <div className="flex items-center gap-4 w-full">
-        <div className="flex items-center flex-shrink-0">
+    <nav className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center bg-white px-2 pr-5">
+      <div className="flex w-full items-center gap-4">
+        <div className="flex flex-shrink-0 items-center">
           <SidebarTrigger />
           <Link href="/">
-            <div className="p-4 flex items-center gap-1">
+            <div className="flex items-center gap-1 p-4">
               <Image src="/logo.svg" alt="TuTube logo" width={32} height={32} />
               <p className="text-xl font-semibold tracking-tight">TuTube</p>
             </div>
           </Link>
         </div>
 
-        <div className="flex-1 flex justify-center max-w-[720px] mx-auto">
+        <div className="mx-auto flex max-w-[720px] flex-1 justify-center">
           <SearchInput />
         </div>
 
-        <div className="flex-shrink-0 items-centerflex gap-4">
+        <div className="items-centerflex flex-shrink-0 gap-4">
           <AuthButton />
         </div>
       </div>

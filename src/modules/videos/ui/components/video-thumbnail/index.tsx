@@ -16,8 +16,8 @@ export function VideoThumbnail({
   duration,
 }: VideoThumbnailProps) {
   return (
-    <div className="relative group">
-      <div className="relative w-full overflow-hidden rounded-xl aspect-video">
+    <div className="group relative">
+      <div className="relative aspect-video w-full overflow-hidden rounded-xl">
         <Image
           src={imageUrl ?? "/placeholder.svg"}
           alt={title}
@@ -34,7 +34,7 @@ export function VideoThumbnail({
       </div>
 
       {duration > 0 && (
-        <div className="absolute bottom-2 right-2 px-1 py-0.5 rounded bg-black/80 text-white text-xs font-medium">
+        <div className="absolute bottom-2 right-2 rounded bg-black/80 px-1 py-0.5 text-xs font-medium text-white">
           {formatDuration(duration)}
         </div>
       )}

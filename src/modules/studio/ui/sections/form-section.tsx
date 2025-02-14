@@ -103,7 +103,7 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex items-center justify-between mb-6">
+        <div className="mb-6 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Video details</h1>
             <p className="text-xs text-muted-foreground">
@@ -127,7 +127,7 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                 <DropdownMenuItem
                   onClick={() => remove.mutate({ id: videoId })}
                 >
-                  <TrashIcon className="size-4 mr-2" />
+                  <TrashIcon className="mr-2 size-4" />
                   Delete
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -135,7 +135,7 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
           <div className="space-y-8 lg:col-span-3">
             <FormField
               control={form.control}
@@ -208,18 +208,18 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
           </div>
 
           <div className="flex flex-col gap-8 lg:col-span-2">
-            <div className="flex flex-col gap-4 bg-[#F9F9F9] rounded-xl overflow-hidden h-fit">
-              <div className="aspect-video overflow-hidden relative">
+            <div className="flex h-fit flex-col gap-4 overflow-hidden rounded-xl bg-[#F9F9F9]">
+              <div className="relative aspect-video overflow-hidden">
                 <VideoPlayer
                   playbackId={video.muxPlaybackId}
                   thumbnailUrl={video.thumbnailUrl}
                 />
               </div>
 
-              <div className="p-4 flex flex-col gap-y-6">
-                <div className="flex justify-between items-center gap-x-2">
+              <div className="flex flex-col gap-y-6 p-4">
+                <div className="flex items-center justify-between gap-x-2">
                   <div className="flex flex-col gap-y-1">
-                    <p className="text-muted-foreground text-xs">Video link</p>
+                    <p className="text-xs text-muted-foreground">Video link</p>
 
                     <div className="flex items-center gap-x-2">
                       <Link
@@ -245,9 +245,9 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <div className="flex flex-col gap-y-1">
-                    <p className="text-muted-foreground text-xs">
+                    <p className="text-xs text-muted-foreground">
                       Video status
                     </p>
                     <p className="text-sm">
@@ -256,9 +256,9 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <div className="flex flex-col gap-y-1">
-                    <p className="text-muted-foreground text-xs">
+                    <p className="text-xs text-muted-foreground">
                       Subtitle status
                     </p>
                     <p className="text-sm">
