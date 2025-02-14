@@ -68,6 +68,7 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
   const [isCopied, setIsCopied] = useState(false);
 
   const utils = trpc.useUtils();
+
   const update = trpc.videos.update.useMutation({
     onSuccess() {
       utils.studio.getMany.invalidate();
@@ -78,11 +79,23 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
       toast.error(error.message);
     },
   });
+
   const remove = trpc.videos.remove.useMutation({
     onSuccess() {
       utils.studio.getMany.invalidate();
       toast.success("Video removed");
       router.push("/studio");
+    },
+    onError(error) {
+      toast.error(error.message);
+    },
+  });
+
+  const restoreThumbnail = trpc.videos.restoreThumbnail.useMutation({
+    onSuccess() {
+      utils.studio.getMany.invalidate();
+      utils.studio.getOne.invalidate({ id: videoId });
+      toast.success("Thumbnail restored");
     },
     onError(error) {
       toast.error(error.message);
@@ -227,7 +240,11 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                               AI-generated
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() =>
+                                restoreThumbnail.mutate({ id: videoId })
+                              }
+                            >
                               <RotateCcwIcon className="mr-1" />
                               Restore
                             </DropdownMenuItem>
