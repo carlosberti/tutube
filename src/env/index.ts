@@ -17,6 +17,7 @@ export const env = createEnv({
     QSTASH_NEXT_SIGNING_KEY: z.string(),
     UPSTASH_WORKFLOW_URL: z.string(),
     GEMINI_API_KEY: z.string(),
+    STABILITY_API_KEY: z.string(),
   },
   client: {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),

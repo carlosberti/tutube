@@ -47,6 +47,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
 import { videoInsertSchema } from "@/db/schema";
 import { snakeCaseToTitleCase } from "@/lib/utils";
@@ -54,6 +55,7 @@ import { THUMBNAIL_FALLBACK } from "@/modules/videos/constants";
 import { VideoPlayer } from "@/modules/videos/ui/components/video-player";
 import { trpc } from "@/trpc/client";
 
+import { ThumbnailGenerateModal } from "../components/thumbnail-generate-modal";
 import { ThumbnailUploadModal } from "../components/thumbnail-upload-modal";
 
 type FormSectionProps = {
@@ -66,6 +68,7 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
   const [categories] = trpc.categories.getMany.useSuspenseQuery();
 
   const [thumbnailOpen, setThumbnailOpen] = useState(false);
+  const [thumbnailGenerateOpen, setThumbnailGenerateOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
 
   const utils = trpc.useUtils();
@@ -97,17 +100,6 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
       utils.studio.getMany.invalidate();
       utils.studio.getOne.invalidate({ id: videoId });
       toast.success("Thumbnail restored");
-    },
-    onError(error) {
-      toast.error(error.message);
-    },
-  });
-
-  const generateThumbnail = trpc.videos.generateThumbnail.useMutation({
-    onSuccess() {
-      toast.success("Background job started", {
-        description: "Generating thumbnail...",
-      });
     },
     onError(error) {
       toast.error(error.message);
@@ -310,9 +302,7 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                             </DropdownMenuItem>
 
                             <DropdownMenuItem
-                              onClick={() =>
-                                generateThumbnail.mutate({ id: videoId })
-                              }
+                              onClick={() => setThumbnailGenerateOpen(true)}
                             >
                               <SparklesIcon className="mr-1" />
                               AI-generated
@@ -480,12 +470,80 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
         open={thumbnailOpen}
         onOpenChange={setThumbnailOpen}
       />
+
+      <ThumbnailGenerateModal
+        videoId={videoId}
+        open={thumbnailGenerateOpen}
+        onOpenChange={setThumbnailGenerateOpen}
+      />
     </>
   );
 }
 
 function FormSectionSkeleton() {
-  return <div className="flex flex-col gap-4">Loading...</div>;
+  return (
+    <div>
+      <div className="mb-6 flex items-center justify-between">
+        <div className="space-y-2">
+          <Skeleton className="h-7 w-32" />
+          <Skeleton className="h-4 w-40" />
+        </div>
+        <Skeleton className="h-9 w-24" />
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
+        <div className="space-y-8 lg:col-span-3">
+          <div className="space-y-2">
+            <Skeleton className="h-5 w-16" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+
+          <div className="space-y-2">
+            <Skeleton className="h-5 w-24" />
+            <Skeleton className="h-[220px] w-full" />
+          </div>
+
+          <div className="space-y-2">
+            <Skeleton className="h-5 w-20" />
+            <Skeleton className="h-[84px] w-[153px]" />
+          </div>
+
+          <div className="space-y-2">
+            <Skeleton className="h-5 w-20" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-y-8 lg:col-span-2">
+          <div className="flex flex-col gap-4 overflow-hidden rounded-xl bg-[#F9F9F9]">
+            <Skeleton className="aspect-video" />
+
+            <div className="space-y-6 px-4 py-4">
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-20" />
+                <Skeleton className="h-5 w-full" />
+              </div>
+
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-5 w-32" />
+              </div>
+
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-5 w-32" />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Skeleton className="h-5 w-20" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function FormSection({ videoId }: FormSectionProps) {
