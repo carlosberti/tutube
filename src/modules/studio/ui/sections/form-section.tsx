@@ -12,6 +12,7 @@ import {
   CopyIcon,
   Globe2Icon,
   ImagePlusIcon,
+  Loader2Icon,
   LockIcon,
   MoreVerticalIcon,
   RotateCcwIcon,
@@ -102,6 +103,39 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
     },
   });
 
+  const generateThumbnail = trpc.videos.generateThumbnail.useMutation({
+    onSuccess() {
+      toast.success("Background job started", {
+        description: "Generating thumbnail...",
+      });
+    },
+    onError(error) {
+      toast.error(error.message);
+    },
+  });
+
+  const generateTitle = trpc.videos.generateTitle.useMutation({
+    onSuccess() {
+      toast.success("Background job started", {
+        description: "Generating title...",
+      });
+    },
+    onError(error) {
+      toast.error(error.message);
+    },
+  });
+
+  const generateDescription = trpc.videos.generateDescription.useMutation({
+    onSuccess() {
+      toast.success("Background job started", {
+        description: "Generating description...",
+      });
+    },
+    onError(error) {
+      toast.error(error.message);
+    },
+  });
+
   const form = useForm<z.infer<typeof videoInsertSchema>>({
     defaultValues: video,
     resolver: zodResolver(videoInsertSchema),
@@ -164,7 +198,27 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>
+                      <div className="flex items-center gap-x-2">
+                        Title
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          type="button"
+                          className="size-6 rounded-full [&_svg]:size-3"
+                          onClick={() => generateTitle.mutate({ id: videoId })}
+                          disabled={
+                            generateTitle.isPending || !video.muxTrackId
+                          }
+                        >
+                          {generateTitle.isPending ? (
+                            <Loader2Icon className="animate-spin" />
+                          ) : (
+                            <SparklesIcon />
+                          )}
+                        </Button>
+                      </div>
+                    </FormLabel>
 
                     <FormControl>
                       <Input
@@ -183,7 +237,27 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <div className="flex items-center gap-x-2">
+                      Description
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        type="button"
+                        className="size-6 rounded-full [&_svg]:size-3"
+                        onClick={() =>
+                          generateDescription.mutate({ id: videoId })
+                        }
+                        disabled={
+                          generateDescription.isPending || !video.muxTrackId
+                        }
+                      >
+                        {generateDescription.isPending ? (
+                          <Loader2Icon className="animate-spin" />
+                        ) : (
+                          <SparklesIcon />
+                        )}
+                      </Button>
+                    </div>
 
                     <FormControl>
                       <Textarea
@@ -235,7 +309,11 @@ function FormSectionSuspense({ videoId }: FormSectionProps) {
                               Change
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() =>
+                                generateThumbnail.mutate({ id: videoId })
+                              }
+                            >
                               <SparklesIcon className="mr-1" />
                               AI-generated
                             </DropdownMenuItem>
