@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuth } from "@clerk/nextjs";
+
 import { AsyncBoundary } from "@/components/async-boundary";
 import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
@@ -13,7 +15,24 @@ type VideoSectionProps = {
 };
 
 function VideoSecitonSuspense({ videoId }: VideoSectionProps) {
+  const { isSignedIn } = useAuth();
+
+  const utils = trpc.useUtils();
   const [video] = trpc.videos.getOne.useSuspenseQuery({ id: videoId });
+
+  const createView = trpc.videoViews.create.useMutation({
+    onSuccess() {
+      utils.videos.getOne.invalidate({ id: videoId });
+    },
+  });
+
+  const handlePlay = () => {
+    if (!isSignedIn) {
+      return;
+    }
+
+    createView.mutate({ id: videoId });
+  };
 
   return (
     <>
@@ -25,7 +44,7 @@ function VideoSecitonSuspense({ videoId }: VideoSectionProps) {
       >
         <VideoPlayer
           autoPlay
-          onPlay={() => {}}
+          onPlay={handlePlay}
           playbackId={video.muxPlaybackId}
           thumbnailUrl={video.thumbnailUrl}
         />

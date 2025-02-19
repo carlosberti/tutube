@@ -18,10 +18,10 @@ export function VideoTopRow({ video }: VideoTopRowProps) {
     () => ({
       views: {
         compact: Intl.NumberFormat("en-US", { notation: "compact" }).format(
-          1000
+          video.viewCount
         ),
         expanded: Intl.NumberFormat("en-US", { notation: "standard" }).format(
-          1000
+          video.viewCount
         ),
       },
       date: {
@@ -29,7 +29,7 @@ export function VideoTopRow({ video }: VideoTopRowProps) {
         expanded: format(video.createdAt, "d MMM yyyy"),
       },
     }),
-    [video.createdAt]
+    [video.createdAt, video.viewCount]
   );
 
   return (
