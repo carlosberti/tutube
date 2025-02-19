@@ -64,6 +64,13 @@
       "when": 1739553844211,
       "tag": "0008_add thumbnail and preview key",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1739930871516,
+      "tag": "0009_add videoViews",
+      "breakpoints": true
     }
   ]
 }
