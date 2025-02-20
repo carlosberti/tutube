@@ -98,3 +98,25 @@ export const videoViews = pgTable(
 export const videoViewSelectSchema = createSelectSchema(videoViews);
 export const videoViewInsertSchema = createInsertSchema(videoViews);
 export const videoViewUpdateSchema = createUpdateSchema(videoViews);
+
+export const reactionType = pgEnum("reaction_type", ["like", "dislike"]);
+
+export const videoReactions = pgTable(
+  "video_reactions",
+  {
+    userId: uuid("user_id")
+      .references(() => users.id, { onDelete: "cascade" })
+      .notNull(),
+    videoId: uuid("video_id")
+      .references(() => videos.id, { onDelete: "cascade" })
+      .notNull(),
+    type: reactionType("type").notNull(),
+    ...timeStampFields,
+  },
+  (t) => [
+    primaryKey({
+      name: "video_reactions_pkey",
+      columns: [t.userId, t.videoId],
+    }),
+  ]
+);
