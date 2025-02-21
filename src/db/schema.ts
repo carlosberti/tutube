@@ -31,6 +31,26 @@ export const users = pgTable(
   (t) => [uniqueIndex("clerk_id_idx").on(t.clerkId)]
 );
 
+export const subscriptions = pgTable(
+  "subscriptions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    viewerId: uuid("viewer_id")
+      .references(() => users.id, { onDelete: "cascade" })
+      .notNull(),
+    creatorId: uuid("creator_id")
+      .references(() => users.id, { onDelete: "cascade" })
+      .notNull(),
+    ...timeStampFields,
+  },
+  (t) => [
+    primaryKey({
+      name: "subscriptions_pk",
+      columns: [t.viewerId, t.creatorId],
+    }),
+  ]
+);
+
 export const categories = pgTable(
   "categories",
   {

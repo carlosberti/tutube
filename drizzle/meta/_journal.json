@@ -78,6 +78,20 @@
       "when": 1740014468432,
       "tag": "0010_add videoReactions",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1740168795163,
+      "tag": "0011_add subscriptions schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1740169166474,
+      "tag": "0012_add missing pk at subscriptions",
+      "breakpoints": true
     }
   ]
 }
