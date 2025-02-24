@@ -92,6 +92,20 @@
       "when": 1740169166474,
       "tag": "0012_add missing pk at subscriptions",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1740420406482,
+      "tag": "0013_change form ..._pkey to ..._pk",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1740420455795,
+      "tag": "0014_add comments",
+      "breakpoints": true
     }
   ]
 }

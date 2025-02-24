@@ -34,7 +34,6 @@ export const users = pgTable(
 export const subscriptions = pgTable(
   "subscriptions",
   {
-    id: uuid("id").primaryKey().defaultRandom(),
     viewerId: uuid("viewer_id")
       .references(() => users.id, { onDelete: "cascade" })
       .notNull(),
@@ -96,6 +95,18 @@ export const videoInsertSchema = createInsertSchema(videos);
 export const videoSelectSchema = createSelectSchema(videos);
 export const videoUpdateSchema = createUpdateSchema(videos);
 
+export const comments = pgTable("comments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
+  videoId: uuid("video_id")
+    .references(() => videos.id, { onDelete: "cascade" })
+    .notNull(),
+  value: text("value").notNull(),
+  ...timeStampFields,
+});
+
 export const videoViews = pgTable(
   "video_views",
   {
@@ -109,7 +120,7 @@ export const videoViews = pgTable(
   },
   (t) => [
     primaryKey({
-      name: "video_view_pkey",
+      name: "video_view_pk",
       columns: [t.userId, t.videoId],
     }),
   ]
@@ -135,7 +146,7 @@ export const videoReactions = pgTable(
   },
   (t) => [
     primaryKey({
-      name: "video_reactions_pkey",
+      name: "video_reactions_pk",
       columns: [t.userId, t.videoId],
     }),
   ]
