@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import { trpc } from "@/trpc/client";
 
 import { VideoBanner } from "../components/video-banner";
-import { VideoPlayer } from "../components/video-player";
-import { VideoTopRow } from "../components/video-top-row";
+import { VideoPlayer, VideoPlayerSkeleton } from "../components/video-player";
+import { VideoTopRow, VideoTopRowSkeleton } from "../components/video-top-row";
 
 type VideoSectionProps = {
   videoId: string;
@@ -58,7 +58,12 @@ function VideoSecitonSuspense({ videoId }: VideoSectionProps) {
 }
 
 function VideoSectionSkeleton() {
-  return null;
+  return (
+    <>
+      <VideoPlayerSkeleton />
+      <VideoTopRowSkeleton />
+    </>
+  );
 }
 
 export function VideoSection({ videoId }: VideoSectionProps) {

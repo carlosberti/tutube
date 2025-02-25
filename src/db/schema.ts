@@ -107,6 +107,10 @@ export const comments = pgTable("comments", {
   ...timeStampFields,
 });
 
+export const commentsInsertSchema = createInsertSchema(comments);
+export const commentsSelectSchema = createSelectSchema(comments);
+export const commentsUpdateSchema = createUpdateSchema(comments);
+
 export const videoViews = pgTable(
   "video_views",
   {

@@ -17,7 +17,7 @@ export function VideoView({ videoId }: VideoViewProps) {
             <SuggestionsSection />
           </div>
 
-          <CommentsSection />
+          <CommentsSection videoId={videoId} />
         </div>
 
         <div className="shrink-1 hidden w-[380px] xl:block 2xl:w-[460px]">

@@ -11,6 +11,10 @@ type VideoPlayerProps = {
   onPlay?: () => void;
 };
 
+export function VideoPlayerSkeleton() {
+  return <div className="aspect-video rounded-xl bg-black" />;
+}
+
 export function VideoPlayer({
   playbackId,
   thumbnailUrl,
