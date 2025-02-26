@@ -7,6 +7,7 @@ import {
   integer,
   pgEnum,
   primaryKey,
+  foreignKey,
 } from "drizzle-orm/pg-core";
 import {
   createInsertSchema,
@@ -97,17 +98,28 @@ export const videoInsertSchema = createInsertSchema(videos);
 export const videoSelectSchema = createSelectSchema(videos);
 export const videoUpdateSchema = createUpdateSchema(videos);
 
-export const comments = pgTable("comments", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  userId: uuid("user_id")
-    .references(() => users.id, { onDelete: "cascade" })
-    .notNull(),
-  videoId: uuid("video_id")
-    .references(() => videos.id, { onDelete: "cascade" })
-    .notNull(),
-  value: text("value").notNull(),
-  ...timeStampFields,
-});
+export const comments = pgTable(
+  "comments",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    parentId: uuid("parent_id"),
+    userId: uuid("user_id")
+      .references(() => users.id, { onDelete: "cascade" })
+      .notNull(),
+    videoId: uuid("video_id")
+      .references(() => videos.id, { onDelete: "cascade" })
+      .notNull(),
+    value: text("value").notNull(),
+    ...timeStampFields,
+  },
+  (t) => [
+    foreignKey({
+      columns: [t.parentId],
+      foreignColumns: [t.id],
+      name: "comments_parent_id_fk",
+    }).onDelete("cascade"),
+  ]
+);
 
 export const commentsInsertSchema = createInsertSchema(comments);
 export const commentsSelectSchema = createSelectSchema(comments);
