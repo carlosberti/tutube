@@ -8,8 +8,13 @@ type PageProps = {
 
 export default async function Page({ params }: PageProps) {
   const { videoId } = await params;
+
   void trpc.studio.getOne.prefetch({ id: videoId });
   void trpc.comments.getMany.prefetchInfinite({
+    videoId,
+    limit: DEFAULT_LIMIT,
+  });
+  void trpc.suggestions.getMany.prefetchInfinite({
     videoId,
     limit: DEFAULT_LIMIT,
   });

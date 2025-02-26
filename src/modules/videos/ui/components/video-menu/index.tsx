@@ -20,7 +20,11 @@ type VideoMenuProps = {
   onRemove?: () => void;
 };
 
-export function VideoMenu({ videoId, variant, onRemove }: VideoMenuProps) {
+export function VideoMenu({
+  videoId,
+  variant = "ghost",
+  onRemove,
+}: VideoMenuProps) {
   const onShare = () => {
     // eslint-disable-next-line no-restricted-syntax
     const fullUrl = `${process.env.VERCEL_URL || "http://localhost:3000"}/videos/${videoId}`;
