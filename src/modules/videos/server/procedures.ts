@@ -213,7 +213,7 @@ export const videosRouter = createTRPCRouter({
         userId = user.id;
       }
 
-      const viewerReactions = db.$with("viewerReactions").as(
+      const viewerReactions = db.$with("viewe_reactions").as(
         db
           .select({
             videoId: videoReactions.videoId,
